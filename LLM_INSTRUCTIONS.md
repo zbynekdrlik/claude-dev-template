@@ -13,6 +13,13 @@
    - Flag any code-documentation discrepancies
    - Every change must be incorporated into docs to enable rebuilding from scratch
 
+3. **Rules Directory Check**
+   - Check if repository contains a `/rules/` directory
+   - If `/rules/` exists, read ALL documents from it using the **active feature branch**
+   - **IMPORTANT**: Always read rules from the feature branch you're working on, not from main
+   - Incorporate all rules into the development process
+   - Rules override or supplement these general instructions
+
 ## Development Rules
 
 ### Version Control (CRITICAL)
@@ -82,10 +89,12 @@ Adapt to project's existing structure:
 - Numbered documentation (if `XX-name.md` pattern)
 - Standard directories (if `/docs/` structure)
 - Integration requirements (MCP, API, etc.)
+- Project-specific rules (if `/rules/` directory exists)
 
 ## Quick Checklist
 - [ ] Using feature branch (not main)
 - [ ] Following project documentation structure
+- [ ] Checked and read all rules from `/rules/` directory (if exists)
 - [ ] Version incremented and shown in chat
 - [ ] Version logging implemented on startup
 - [ ] PR created/updated
@@ -101,3 +110,4 @@ Adapt to project's existing structure:
 4. **Documentation First**: Keep docs in sync with code
 5. **User Verification**: Always get logs and approval
 6. **Project Consistency**: Follow existing patterns
+7. **Rules Priority**: Project-specific rules in `/rules/` take precedence
