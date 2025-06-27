@@ -61,6 +61,24 @@
 - Keep changelogs current
 - Ensure documentation enables full project rebuild
 
+#### README Maintenance (CRITICAL)
+- **Review and update README.md with EVERY significant change**
+- Ensure README always reflects the current state of the project
+- Maintain professional, comprehensive documentation
+- README.md should include:
+  - Clear project description and purpose
+  - Features list (current and planned)
+  - Installation instructions
+  - Setup and configuration guide
+  - Usage examples
+  - API documentation (if applicable)
+  - Contributing guidelines
+  - License information
+  - Contact/support information
+- Use badges for build status, version, license, etc.
+- Include screenshots/demos where applicable
+- Keep language clear, concise, and professional
+
 ### Logging Requirements
 Users should provide logs showing:
 - **Version loaded message** (e.g., `Script version X.Y.Z loaded`)
@@ -92,6 +110,7 @@ Adapt to project's existing structure:
 - [ ] Tests passed with logs provided (including version verification)
 - [ ] User approved changes
 - [ ] Documentation updated
+- [ ] **README.md reviewed and updated**
 - [ ] Changelog/history maintained
 
 ## Key Principles
@@ -101,3 +120,4 @@ Adapt to project's existing structure:
 4. **Documentation First**: Keep docs in sync with code
 5. **User Verification**: Always get logs and approval
 6. **Project Consistency**: Follow existing patterns
+7. **README Excellence**: Maintain professional, comprehensive README as the primary project documentation
