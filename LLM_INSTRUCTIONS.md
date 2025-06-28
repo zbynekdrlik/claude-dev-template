@@ -7,13 +7,23 @@
    - Check implementation status and active branches
    - **ALWAYS identify and switch to active feature branch for development**
 
-2. **Documentation Review**
+2. **Thread Continuity Check** (CRITICAL)
+   - **IMMEDIATELY check for `THREAD_PROGRESS.md` in the repository**
+   - If exists, read it to understand:
+     - Current project state and active branch
+     - Work completed in previous threads
+     - Current tasks and blockers
+     - Next steps identified by previous thread
+   - If starting fresh thread on existing project without this file, create it
+   - Update throughout the session and especially before thread limit
+
+3. **Documentation Review**
    - Identify documentation pattern (e.g., `/docs/` directory or numbered files)
    - Verify docs support LLM-based implementation
    - Flag any code-documentation discrepancies
    - Every change must be incorporated into docs to enable rebuilding from scratch
 
-3. **Rules Directory Check**
+4. **Rules Directory Check**
    - Check if repository contains a `/rules/` directory
    - If `/rules/` exists, read ALL documents from it using the **active feature branch**
    - **IMPORTANT**: Always read rules from the feature branch you're working on, not from main
@@ -54,6 +64,19 @@
 
 - Follow language-specific style guidelines (PEP-8 for Python)
 - Implement comprehensive logging with timestamps
+
+### Thread Progress Management
+- **Update `THREAD_PROGRESS.md` regularly**:
+  - After completing significant tasks
+  - When encountering blockers or decisions
+  - Before context switches
+  - **MANDATORY before approaching thread limit**
+- Include in updates:
+  - Completed work with specific details
+  - Current state of implementation
+  - Any pending user decisions
+  - Clear next steps for continuation
+- Commit this file to the feature branch regularly
 
 ### Testing & Approval Workflow
 1. Make changes in feature branch
@@ -110,6 +133,7 @@ Adapt to project's existing structure:
 - Project-specific rules (if `/rules/` directory exists)
 
 ## Quick Checklist
+- [ ] Checked and updated `THREAD_PROGRESS.md`
 - [ ] Using feature branch (not main)
 - [ ] Following project documentation structure
 - [ ] Checked and read all rules from `/rules/` directory (if exists)
@@ -121,6 +145,7 @@ Adapt to project's existing structure:
 - [ ] Documentation updated
 - [ ] **README.md reviewed and updated**
 - [ ] Changelog/history maintained
+- [ ] Thread progress documented for next session
 
 ## Key Principles
 1. **Branch Protection**: Never work directly on main
@@ -131,3 +156,4 @@ Adapt to project's existing structure:
 6. **Project Consistency**: Follow existing patterns
 7. **Rules Priority**: Project-specific rules in `/rules/` take precedence
 8. **README Excellence**: Maintain professional, comprehensive README as the primary project documentation
+9. **Thread Continuity**: Always maintain context across conversation threads
