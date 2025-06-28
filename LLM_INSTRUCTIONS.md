@@ -9,7 +9,9 @@
 
 2. **Thread Continuity Check** (CRITICAL)
    - **IMMEDIATELY check for `THREAD_PROGRESS.md` in the repository**
-   - If exists, read it to understand:
+   - **Read the "CRITICAL CURRENT STATE" section FIRST**
+   - **DO NOT assume tasks are complete without test logs proving it**
+   - If exists, read it COMPLETELY to understand:
      - Current project state and active branch
      - Work completed in previous threads
      - Current tasks and blockers
@@ -29,6 +31,30 @@
    - **IMPORTANT**: Always read rules from the feature branch you're working on, not from main
    - Incorporate all rules into the development process
    - Rules override or supplement these general instructions
+
+## Thread Continuity Protocol (CRITICAL)
+
+### On Thread Start - MANDATORY CHECKS:
+1. Read THREAD_PROGRESS.md COMPLETELY
+2. Check "CRITICAL CURRENT STATE" section at the top
+3. Look for "Waiting for:" and "Currently working on:" entries
+4. DO NOT make assumptions about completion
+5. If testing was in progress, ALWAYS assume it's incomplete unless logs prove otherwise
+
+### Status Verification Questions:
+- Was the last task IMPLEMENTED or TESTED?
+- If implemented, were logs provided showing it works?
+- If testing started, which specific tests passed/failed?
+- What was the user's last action/response?
+
+### Recovery Pattern:
+```
+IF no clear status:
+   ASK: "I see we were working on [X]. Did you complete testing? 
+         Can you provide the logs from the last session?"
+ELSE:
+   CONTINUE from exact stopping point
+```
 
 ## Development Rules
 
@@ -66,6 +92,36 @@
 - Implement comprehensive logging with timestamps
 
 ### Thread Progress Management
+
+#### THREAD_PROGRESS.md Structure (MANDATORY)
+```markdown
+# Thread Progress Tracking
+
+## CRITICAL CURRENT STATE
+**⚠️ EXACTLY WHERE WE ARE RIGHT NOW:**
+- [ ] Currently working on: [SPECIFIC TASK]
+- [ ] Waiting for: [USER ACTION/LOGS/DECISION]
+- [ ] Blocked by: [ANY BLOCKERS]
+
+## Implementation Status
+- Phase: [NUMBER] - [NAME]
+- Step: [SPECIFIC STEP IN PHASE]
+- Status: [PLANNING/IMPLEMENTING/TESTING/BLOCKED/COMPLETE]
+
+## Testing Status Matrix
+| Component | Implemented | Unit Tested | Integration Tested | Multi-Instance Tested | 
+|-----------|------------|-------------|--------------------|-----------------------|
+| Script A  | ✅ v1.2.3  | ❌          | ❌                 | ❌                    |
+| Script B  | ✅ v2.3.4  | ✅          | ❌                 | ❌                    |
+
+## Last User Action
+- Date/Time: [TIMESTAMP]
+- Action: [WHAT USER DID]
+- Result: [OUTCOME/LOGS PROVIDED]
+- Next Required: [WHAT'S NEEDED FROM USER]
+```
+
+#### Update Requirements
 - **Update `THREAD_PROGRESS.md` regularly**:
   - After completing significant tasks
   - When encountering blockers or decisions
@@ -77,6 +133,52 @@
   - Any pending user decisions
   - Clear next steps for continuation
 - Commit this file to the feature branch regularly
+
+### Testing Progress Documentation
+
+**Testing State Machine - Use these clear states:**
+- `IMPLEMENTED_NOT_TESTED` - Code written, no tests run
+- `TESTING_STARTED` - Some tests run, not complete  
+- `TESTING_FAILED` - Tests run, issues found
+- `TESTING_PARTIAL` - Some tests passed, others pending
+- `TESTING_COMPLETE` - All tests passed with logs
+- `PRODUCTION_READY` - Tested and user approved
+
+**NEVER mark a feature as complete without test logs showing:**
+1. Version number logged on startup
+2. Feature-specific success indicators  
+3. No critical errors
+4. Expected behavior confirmed
+
+**Testing Phases:**
+1. **Unit Testing**: Individual component works
+2. **Integration Testing**: Component works with others
+3. **System Testing**: Full workflow functions
+4. **Multi-Instance Testing**: Works with multiple connections
+
+**Update THREAD_PROGRESS.md after EACH test with:**
+- Component tested
+- Test type (unit/integration/system/multi)
+- Pass/Fail status
+- Log snippets proving status
+- Issues found
+- Next test required
+
+### Phase Transition Rules
+
+**NEVER move to next phase without:**
+1. ✅ All implementation complete
+2. ✅ All tests passed with logs
+3. ✅ User explicitly confirms ready to proceed
+4. ✅ THREAD_PROGRESS.md shows all checkboxes complete
+
+**Phase Completion Checklist:**
+- [ ] Implementation complete (version logged)
+- [ ] Unit tests passed (logs provided)
+- [ ] Integration tests passed (logs provided)
+- [ ] Documentation updated
+- [ ] User approved results
+- [ ] Ready for next phase confirmed
 
 ### Testing & Approval Workflow
 1. Make changes in feature branch
@@ -124,6 +226,22 @@ Users should provide logs showing:
 [app.py] [2025-06-27 12:00:03] Operation completed successfully
 ```
 
+## Context Loss Prevention
+
+### Every significant action requires:
+1. Update THREAD_PROGRESS.md IMMEDIATELY
+2. Include specific details:
+   - Exact file modified
+   - Version number changed to
+   - Specific function/feature affected
+   - Test status for that change
+   
+### Before thread limit approaching:
+1. Update "CRITICAL CURRENT STATE" with exact position
+2. List any pending user actions needed
+3. Document any decisions waiting
+4. Create clear handoff notes
+
 ## Project-Specific Patterns
 Adapt to project's existing structure:
 - Phase-based development (if `/phases/` exists)
@@ -134,6 +252,8 @@ Adapt to project's existing structure:
 
 ## Quick Checklist
 - [ ] Checked and updated `THREAD_PROGRESS.md`
+- [ ] Read "CRITICAL CURRENT STATE" section first
+- [ ] Verified implementation vs testing status
 - [ ] Using feature branch (not main)
 - [ ] Following project documentation structure
 - [ ] Checked and read all rules from `/rules/` directory (if exists)
@@ -153,7 +273,11 @@ Adapt to project's existing structure:
 3. **Version Transparency**: Show version changes in chat AND log on startup
 4. **Documentation First**: Keep docs in sync with code
 5. **User Verification**: Always get logs and approval
-6. **Project Consistency**: Follow existing patterns
-7. **Rules Priority**: Project-specific rules in `/rules/` take precedence
-8. **README Excellence**: Maintain professional, comprehensive README as the primary project documentation
-9. **Thread Continuity**: Always maintain context across conversation threads
+6. **Testing is Not Complete Until Logs Prove It**: Implementation ≠ Working
+7. **Never Assume Completion Without Proof**: Always verify with test logs
+8. **Always Pick Up EXACTLY Where Left Off**: Read thread progress carefully
+9. **Project Consistency**: Follow existing patterns
+10. **Rules Priority**: Project-specific rules in `/rules/` take precedence
+11. **README Excellence**: Maintain professional, comprehensive README
+12. **Thread Continuity**: Always maintain context across conversation threads
+13. **When in Doubt, Ask for Status/Logs**: Don't assume, verify
